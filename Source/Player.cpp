@@ -1,3 +1,5 @@
+#include <string.h>
+
 import CBase;
 import GameRules;
 

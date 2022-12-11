@@ -1,10 +1,3 @@
-#include <string>
-#include <string_view>
-
-import <algorithm>;
-import <array>;
-import <vector>;
-
 import eiface;
 import pm_defs;
 import util;
@@ -57,12 +50,18 @@ int fw_Spawn_Post(edict_t *pEdict) noexcept
 	return 0;
 }
 
+extern "C++" namespace Config
+{
+	extern void PreparePath(void) noexcept;
+}
+
 void fw_ServerActivate_Post(edict_t *pEdictList, int edictCount, int clientMax) noexcept
 {
 	// plugin_init
 
 	Round::Hook();
 	Player::Hook();
+	Config::PreparePath();
 
 	// plugin_cfg
 

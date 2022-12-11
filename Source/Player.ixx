@@ -1,6 +1,6 @@
 export module Player;
 
-export import <array>;
+export import std;
 
 export import CBase;
 

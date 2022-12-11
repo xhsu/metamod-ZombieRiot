@@ -36,7 +36,7 @@ export inline constexpr auto AMXX_GAME_BAD = 1;			/* This module can not load on
 // The next section is copied from the amx.h file
 // Copyright (c) ITB CompuPhase, 1997-2005
 
-export import <cstdint>;
+export import std;
 
 export inline constexpr auto PAWN_CELL_SIZE = 32;
 
@@ -367,14 +367,14 @@ export inline mutil_funcs_t *gpMetaUtilFuncs = nullptr;	// metamod utility funct
 export inline constexpr plugin_info_t gPluginInfo =
 {
 	.ifvers		= META_INTERFACE_VERSION,
-	.name		= "minimal stub",
-	.version	= "1.17",
-	.date		= "2003/11/15",
-	.author		= "Will Day <willday@metamod.org>",
-	.url		= "http://www.metamod.org/",
-	.logtag		= "STUB",
+	.name		= "Zombie Riot",
+	.version	= "1.18",
+	.date		= __DATE__,
+	.author		= "DSHGFHDS",
+	.url		= "n/a",
+	.logtag		= "ZR",
 	.loadable	= PT_ANYTIME,
-	.unloadable	= PT_ANYPAUSE,
+	.unloadable	= PT_NEVER,
 };
 
 export inline constexpr auto PLID = &gPluginInfo;
@@ -385,11 +385,11 @@ export inline constexpr auto PLID = &gPluginInfo;
 // Module info
 export inline constexpr amxx_module_info_s g_ModuleInfo =
 {
-	.name = "example",
+	.name = "Zombie Riot",
 	.author = "Luna the Reborn",
-	.version = "1.0",
+	.version = "1.18",
 	.reload = false,	// Should reload module on new map?
-	.logtag = "example",
+	.logtag = "ZR",
 	.library = "What is this?",
 	.libclass = "",	// LUNA: no idea what is this, but keep it empty.
 };

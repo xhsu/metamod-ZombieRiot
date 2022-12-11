@@ -36,6 +36,9 @@
     <Filter Include="CSDK">
       <UniqueIdentifier>{2b44097e-9fb7-4560-9992-11d3ab476127}</UniqueIdentifier>
     </Filter>
+    <Filter Include="STL">
+      <UniqueIdentifier>{d81a0c08-6287-40e9-9809-8b1257e4a66e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\metamod-p\hlsdk\common\beamdef.ixx">
@@ -268,6 +271,24 @@
     </ClCompile>
     <ClCompile Include="..\Hydrogenium\UtlConcepts.ixx">
       <Filter>Hydrogenium</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VCToolsInstallDir)modules\std.compat.ixx">
+      <Filter>STL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VCToolsInstallDir)modules\std.ixx">
+      <Filter>STL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Message.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Hydrogenium\UtlString.ixx">
+      <Filter>Hydrogenium</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platform.ixx">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
