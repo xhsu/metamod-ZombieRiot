@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="HLSDK">
+      <UniqueIdentifier>{a6bf7279-69b8-472d-8130-293acf26a9fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSDK\common">
+      <UniqueIdentifier>{2da40282-65b6-4524-86de-cf74e93b0fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSDK\dlls">
+      <UniqueIdentifier>{cd8d13e5-ee32-4a4d-859f-43c25d6e46ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSDK\pm_shared">
+      <UniqueIdentifier>{e9ee1fef-be7e-4937-b792-d76da5e5fdde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSDK\cl_dll">
+      <UniqueIdentifier>{541671f5-b9a3-441c-808d-18aec0e16e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSDK\engine">
+      <UniqueIdentifier>{7fe3e166-d1f0-4c96-9c77-090bb6d8af19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MetaMod">
+      <UniqueIdentifier>{7123522a-b507-4db5-b5b1-a2a3f91a9e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hydrogenium">
+      <UniqueIdentifier>{0fdda6b3-d7bc-42a6-8555-965cda09b2a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSDK">
+      <UniqueIdentifier>{2b44097e-9fb7-4560-9992-11d3ab476127}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\metamod-p\hlsdk\common\beamdef.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\cl_entity.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\com_model.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\con_nprint.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\const_.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\crc.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\cvardef.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\demo_api.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\director_cmds.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\dlight.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\dll_state.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\engine_launcher_api.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\entity_state.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\entity_types.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\event_api.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\event_args.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\event_flags.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\exefuncs.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\hltv.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\in_buttons.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\ivoicetweak.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\mathlib.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\net_api.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\netadr.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\particledef.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\pmtrace.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\qfont.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\r_efx.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\r_studioint.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\ref_params.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\screenfade.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\studio_event.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\triangleapi.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\usercmd.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\common\weaponinfo.ixx">
+      <Filter>HLSDK\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\dlls\cdll_dll.ixx">
+      <Filter>HLSDK\dlls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\dlls\extdll.ixx">
+      <Filter>HLSDK\dlls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\dlls\vector.ixx">
+      <Filter>HLSDK\dlls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\archtypes.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\cdll_int.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\custom.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\customentity.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\edict.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\eiface.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\keydefs.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\progdefs.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\progs.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\Sequence.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\shake.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\engine\studio.ixx">
+      <Filter>HLSDK\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\cl_dll\hud_iface.ixx">
+      <Filter>HLSDK\cl_dll</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\cl_dll\wrect.ixx">
+      <Filter>HLSDK\cl_dll</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\pm_shared\pm_defs.ixx">
+      <Filter>HLSDK\pm_shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\pm_shared\pm_info.ixx">
+      <Filter>HLSDK\pm_shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\pm_shared\pm_materials.ixx">
+      <Filter>HLSDK\pm_shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\pm_shared\pm_movevars.ixx">
+      <Filter>HLSDK\pm_shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\pm_shared\pm_shared.ixx">
+      <Filter>HLSDK\pm_shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\metamod\dllapi.ixx">
+      <Filter>MetaMod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\metamod\engine_api.ixx">
+      <Filter>MetaMod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\metamod\meta_api.ixx">
+      <Filter>MetaMod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\metamod\mutil.ixx">
+      <Filter>MetaMod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\metamod\plinfo.ixx">
+      <Filter>MetaMod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\dlls\util.ixx">
+      <Filter>HLSDK\dlls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-p\hlsdk\dlls\activity.ixx">
+      <Filter>HLSDK\dlls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Plugin.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Hydrogenium\UtlHook.ixx">
+      <Filter>Hydrogenium</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Round.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\GameRules.ixx">
+      <Filter>CSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\CBase.ixx">
+      <Filter>CSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Round.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Native.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Hydrogenium\UtlRandom.ixx">
+      <Filter>Hydrogenium</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Hydrogenium\UtlConcepts.ixx">
+      <Filter>Hydrogenium</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="export.def">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
