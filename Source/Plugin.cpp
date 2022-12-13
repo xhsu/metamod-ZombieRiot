@@ -13,6 +13,19 @@ extern qboolean fw_AddToFullPack_Post(entity_state_t *pState, int iEntIndex, edi
 extern void DeployNatives(void) noexcept;
 //
 
+// Message.cpp
+extern void fw_MessageBegin(int iMsgDest, int iMsgIndex, const float *prgflOrigin, edict_t *pEdict) noexcept;
+extern void fw_MessageEnd(void) noexcept;
+extern void fw_WriteByte(int iValue) noexcept;
+extern void fw_WriteChar(int iValue) noexcept;
+extern void fw_WriteShort(int iValue) noexcept;
+extern void fw_WriteLong(int iValue) noexcept;
+extern void fw_WriteAngle(float flValue) noexcept;
+extern void fw_WriteCoord(float flValue) noexcept;
+extern void fw_WriteString(const char *sz) noexcept;
+extern void fw_WriteEntity(int iValue) noexcept;
+//
+
 // Receive engine function table from engine.
 // This appears to be the _first_ DLL routine called by the engine, so we do some setup operations here.
 void __stdcall GiveFnptrsToDll(enginefuncs_t *pengfuncsFromEngine, globalvars_t *pGlobals) noexcept
@@ -251,17 +264,17 @@ int HookEngineAPI(enginefuncs_t *pengfuncsFromEngine, int *interfaceVersion) noe
 		.pfnDecalIndex			= nullptr,
 		.pfnPointContents		= nullptr,
 
-		.pfnMessageBegin		= nullptr,
-		.pfnMessageEnd			= nullptr,
+		.pfnMessageBegin		= &fw_MessageBegin,
+		.pfnMessageEnd			= &fw_MessageEnd,
 
-		.pfnWriteByte			= nullptr,
-		.pfnWriteChar			= nullptr,
-		.pfnWriteShort			= nullptr,
-		.pfnWriteLong			= nullptr,
-		.pfnWriteAngle			= nullptr,
-		.pfnWriteCoord			= nullptr,
-		.pfnWriteString			= nullptr,
-		.pfnWriteEntity			= nullptr,
+		.pfnWriteByte			= &fw_WriteByte,
+		.pfnWriteChar			= &fw_WriteChar,
+		.pfnWriteShort			= &fw_WriteShort,
+		.pfnWriteLong			= &fw_WriteLong,
+		.pfnWriteAngle			= &fw_WriteAngle,
+		.pfnWriteCoord			= &fw_WriteCoord,
+		.pfnWriteString			= &fw_WriteString,
+		.pfnWriteEntity			= &fw_WriteEntity,
 
 		.pfnCVarRegister		= nullptr,
 		.pfnCVarGetFloat		= nullptr,

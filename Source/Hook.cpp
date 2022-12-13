@@ -30,11 +30,15 @@ inline bool g_bShouldPrecache = true;
 
 int fw_Spawn(edict_t* pEdict) noexcept
 {
+	gpMetaGlobals->mres = MRES_IGNORED;
+
 	[[unlikely]]
 	if (g_bShouldPrecache)
 	{
 		g_bShouldPrecache = false;
 	}
+
+	return 0;
 }
 
 int fw_Spawn_Post(edict_t *pEdict) noexcept
