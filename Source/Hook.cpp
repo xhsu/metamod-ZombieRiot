@@ -1,5 +1,8 @@
+import std;
+
 import eiface;
 import pm_defs;
+import progdefs;
 import util;
 
 import CBase;
@@ -22,6 +25,17 @@ inline constexpr array g_rgszEntityCanBeClip =
 	"hostage_entity"sv,
 	"func_pushable"sv,
 };
+
+inline bool g_bShouldPrecache = true;
+
+int fw_Spawn(edict_t* pEdict) noexcept
+{
+	[[unlikely]]
+	if (g_bShouldPrecache)
+	{
+		g_bShouldPrecache = false;
+	}
+}
 
 int fw_Spawn_Post(edict_t *pEdict) noexcept
 {
@@ -65,6 +79,11 @@ void fw_ServerActivate_Post(edict_t *pEdictList, int edictCount, int clientMax) 
 
 	// plugin_cfg
 
+}
+
+void fw_ServerDeactivate_Post(void) noexcept
+{
+	g_bShouldPrecache = true;
 }
 
 META_RES FN_PM_Move(playermove_s *ppmove, qboolean server) noexcept

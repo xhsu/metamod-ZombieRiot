@@ -1,8 +1,10 @@
 import Plugin;
 
 // Hook.cpp
+extern int fw_Spawn(edict_t *pEdict) noexcept;
 extern int fw_Spawn_Post(edict_t *pEdict) noexcept;
 extern void fw_ServerActivate_Post(edict_t *pEdictList, int edictCount, int clientMax) noexcept;
+extern void fw_ServerDeactivate_Post(void) noexcept;
 extern META_RES FN_PM_Move(playermove_s *ppmove, qboolean server) noexcept;
 extern qboolean fw_AddToFullPack_Post(entity_state_t *pState, int iEntIndex, edict_t *pEdict, edict_t *pClientSendTo, qboolean cl_lw, qboolean bIsPlayer, unsigned char *pSet) noexcept;
 //
@@ -24,7 +26,7 @@ int HookGameDLLExportedFn(DLL_FUNCTIONS *pFunctionTable, int *interfaceVersion) 
 	static constexpr DLL_FUNCTIONS gFunctionTable =
 	{
 		.pfnGameInit	= nullptr,
-		.pfnSpawn		= nullptr,
+		.pfnSpawn		= &fw_Spawn,
 		.pfnThink		= nullptr,
 		.pfnUse			= nullptr,
 		.pfnTouch		= nullptr,
@@ -132,7 +134,7 @@ int HookGameDLLExportedFn_Post(DLL_FUNCTIONS *pFunctionTable, int *interfaceVers
 		.pfnClientCommand			= nullptr,
 		.pfnClientUserInfoChanged	= nullptr,
 		.pfnServerActivate			= &fw_ServerActivate_Post,
-		.pfnServerDeactivate		= nullptr,
+		.pfnServerDeactivate		= &fw_ServerDeactivate_Post,
 
 		.pfnPlayerPreThink	= nullptr,
 		.pfnPlayerPostThink	= nullptr,
