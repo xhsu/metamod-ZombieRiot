@@ -1,7 +1,9 @@
 ﻿import std;
 
-import Plugin;
+import Config;
 import Platform;
+import Plugin;
+import Resources;
 
 import UtlString;
 
@@ -13,155 +15,20 @@ using std::vector;
 
 using namespace std::literals;
 
-extern "C++" namespace Config
-{
-	enum struct ESex : bool
-	{
-		FEMALE,
-		MALE,
-	};
-
-	struct Zombie_t
-	{
-		uint8_t m_iId{ 0 };
-		bool m_bHidden{ false };
-		bool m_bBoss{ false };
-		ESex m_Sex{ ESex::MALE };
-		string m_szName{};
-		string m_szIntro{};
-		string m_szPlayerModel{};
-		string m_szViewModel{};
-		float m_flMaxHealth{ 1000.f };
-		float m_flMaxSpeed{ 250.f };
-		float m_flGravity{ 1.f };
-		float m_flSlashInterval{};
-		float m_flStabInterval{};
-		float m_flSlashDist{};
-		float m_flStabDist{};
-		float m_flMeleeDamageMul{};
-		float m_flKnockbackResistance{};
-	};
-
-	inline std::deque<Zombie_t> m_rgZombieInfo{};
-
-	struct Human_t
-	{
-		uint8_t m_iId{ 0 };
-		bool m_bHidden{ false };
-		ESex m_Sex{ ESex::MALE };
-		string m_szName{};
-		string m_szIntro{};
-		string m_szPlayerModel{};
-		float m_flMaxHealth{ 1000.f };
-		float m_flMaxSpeed{ 250.f };
-		float m_flGravity{ 1.f };
-		float m_flKnockbackResistance{};
-	};
-
-	inline std::deque<Human_t> m_rgHumanInfo{};
-
-	struct Weather_t
-	{
-		enum EWeather : uint8_t
-		{
-			Clear = 1,
-			Rain,
-			Thunderstorm,
-			Tempest,
-			Snow,
-			Fog,
-			BlackFog,
-		};
-
-		char m_cLighting{ 'z' };
-		EWeather m_iWeather{ Clear };
-
-		static inline string m_szSkyTexture{};
-	};
-
-	inline std::deque<Weather_t> m_rgWeather{};
-
-	// General Configs
-	inline vector<char> m_rgcAdmin{ 't', 'u' };
-	inline bool m_bUsingZBOT = true;
-	inline bool m_bPrecacheTModel = false;
-	inline bool m_bHideZombieCrosshair = true;
-
-	namespace HintMessage
-	{
-		inline string m_GameBreaks{ u8"沒有足夠的玩家進行遊戲" };
-		inline string m_ForcedIntoHuman{ u8"你被調濟進入人類隊伍" };
-		inline string m_ForcedIntoZombie{ u8"你被調濟進入殭屍隊伍" };
-		inline string m_OneTeamChangePerRound{ u8"每一回合僅允許一次隊伍變更" };
-		inline string m_NotNow{ u8"現在不能變更隊伍" };
-		inline string m_TheOpponentTeamHasFull{ u8"對方隊伍已滿" };
-		inline string m_BecomingBoss{ u8"成為BOSS" };
-		inline string m_BecomingRegularZombie{ u8"成為普通殭屍" };
-		inline string m_Respawning{ u8"重新部署剩餘時間：" };
-		inline string m_HumanCanSeeYe{ u8"人類可以看見你" };
-		inline string m_HumanIsNearby{ u8"人類附近無法部署" };
-		inline string m_Clipping{ u8"穿透牆壁時無法部署" };
-		inline string m_RespawningKeyHint{ u8"按下攻擊鍵以部署" };
-		inline string m_PostRespawning{ u8"已經復活" };
-		inline string m_ChangingZombieType{ u8"殭屍介紹：" };
-		inline string m_ChangingHumanType{ u8"人類介紹：" };
-		inline string m_HumanWins{ u8"人類勝利" };
-		inline string m_ZombieWins{ u8"殭屍勝利" };
-		inline string m_Joining{ u8"已加入遊戲" };
-		inline string m_Leaving{ u8"已離開遊戲" };
-	};
-
-	namespace HintMessageColor
-	{
-		inline color24 m_Respawning{ 255, 255, 0 };
-		inline color24 m_HumanCanSeeYe{ 255, 0, 0 };
-		inline color24 m_HumanIsNearby{ 255, 0, 0 };
-		inline color24 m_Clipping{ 255, 0, 0 };
-		inline color24 m_RespawningKeyHint{ 0, 255, 0 };
-		inline color24 m_PostRespawning{ 0, 255, 0 };
-	};
-
-	namespace Sound
-	{
-		inline string m_Beginning{ "sound/zombieriot/quarantine_01.mp3" };
-		inline string m_Beep{ "zombieriot/beep07.wav" };
-		inline string m_Starting{ "zombieriot/pickup_secret01.wav" };
-		inline array m_CheckPoints{ "zombieriot/survival_medal.wav"s, "zombieriot/survival_playerrec.wav"s, "zombieriot/survival_teamrec.wav"s };
-		inline string m_HumanWins{ "zombieriot/win_human.wav" };
-		inline string m_ZombieWins{ "zombieriot/win_zombi.wav" };
-		inline string m_AllowRespawn{ "zombieriot/pickup_scifi37.wav" };
-		inline string m_PostRespawn{ "zombieriot/pickup_guitarriff10.wav" };
-		inline string m_GhostSpawn{ "zombieriot/menu_horror01.wav" };
-
-		inline vector<string> m_rgszClawMiss{ "zombieriot/claw_miss_1.wav", "zombieriot/claw_miss_2.wav" };
-		inline vector<string> m_rgszScratchingWall{ "zombieriot/claw_scrape_1.wav", "zombieriot/claw_scrape_2.wav", "zombieriot/claw_scrape_3.wav" };
-		inline vector<string> m_rgszClawSlashingFlesh{ "zombieriot/claw_hit_flesh_1.wav", "zombieriot/claw_hit_flesh_2.wav", "zombieriot/claw_hit_flesh_3.wav" };
-		inline vector<string> m_rgszClawSlicingFlesh{ "zombieriot/zombie_slice_1.wav", "zombieriot/zombie_slice_2.wav" };
-		inline vector<string> m_rgszBossHurt{ "zombieriot/bm_inj_04.wav", "zombieriot/bm_inj_05.wav", "zombieriot/bm_inj_06.wav", "zombieriot/bm_inj_07.wav" };
-		inline vector<string> m_rgszZombieHurt{ "zombieriot/been_shot_01.wav", "zombieriot/been_shot_02.wav", "zombieriot/been_shot_03.wav", "zombieriot/been_shot_04.wav" };
-		inline vector<string> m_rgszBossDeath{ "zombieriot/bm_death_01.wav", "zombieriot/bm_death_02.wav", "zombieriot/bm_death_03.wav" };
-		inline vector<string> m_rgszZombieDeath{ "zombieriot/headless_1.wav", "zombieriot/headless_2.wav", "zombieriot/headless_3.wav", "zombieriot/headless_4.wav" };
-	};
-
-	void PreparePath(void) noexcept;
-	void LoadZombies(std::filesystem::path const &hPath) noexcept;
-	void LoadHumans(std::filesystem::path const &hPath) noexcept;
-	void LoadAmbiance(std::filesystem::path const &hPath) noexcept;
-	void LoadSettings(std::filesystem::path const &hPath) noexcept;
-};
-
-void Config::PreparePath(void) noexcept
+void Config::Load(void) noexcept
 {
 	char sz[64]{};
 	g_engfuncs.pfnGetGameDir(sz);
 
-	std::filesystem::path const ConfigDir = std::format("{}/addons/amxmodx/configs/", sz);
+	m_GameDir = sz;
 
-	auto const Settings = ConfigDir / "settingmenu.ini";
-	auto const ZombieConfigFile = ConfigDir / "zombie.ini";
-	auto const HumanConfigFile = ConfigDir / "human.ini";
-	auto const MapAmbianceConfigFile = std::filesystem::path(std::format("{}/addons/amxmodx/configs/ambience_{}.ini", sz, gpGlobals->mapname));
-	auto const GlobalAmbianceConfigFile = ConfigDir / "ambience.ini";
+	std::filesystem::path const ConfigDir = m_GameDir / L"addons/amxmodx/configs/";
+
+	auto const Settings = ConfigDir / L"settingmenu.ini";
+	auto const ZombieConfigFile = ConfigDir / L"zombie.ini";
+	auto const HumanConfigFile = ConfigDir / L"human.ini";
+	auto const MapAmbianceConfigFile = ConfigDir / std::format("ambience_{}.ini", STRING(gpGlobals->mapname));
+	auto const GlobalAmbianceConfigFile = ConfigDir / L"ambience.ini";
 
 	if (std::filesystem::exists(Settings))
 		LoadSettings(Settings);
@@ -176,6 +43,15 @@ void Config::PreparePath(void) noexcept
 		LoadAmbiance(MapAmbianceConfigFile);
 	else if (std::filesystem::exists(GlobalAmbianceConfigFile))
 		LoadAmbiance(GlobalAmbianceConfigFile);
+
+	// Failure detections
+
+	if (m_rgHumanInfo.empty()) [[unlikely]]
+		UTIL_Terminate(L"ZombieRiot至少需要定義一種人類類型以遊玩。");
+	else if (m_rgZombieInfo.empty()) [[unlikely]]
+		UTIL_Terminate(L"ZombieRiot至少需要定義一種人類類型以遊玩。");
+	else if (m_rgWeather.empty()) [[unlikely]]
+		UTIL_Terminate(L"ZombieRiot至少需要定義一項「天氣&亮度」組合以遊玩。");
 }
 
 void Config::LoadZombies(std::filesystem::path const& hPath) noexcept
@@ -477,22 +353,22 @@ void Config::LoadSettings(std::filesystem::path const &hPath) noexcept
 #undef LOAD_COLOR
 
 			else if (szKey == u8"开局音乐")
-				Sound::m_Beginning = std::format("sound/zombieriot/{}", szValue);
+				Sounds::m_Beginning = std::format("sound/zombieriot/{}", szValue);
 
 #define LOAD_SOUND(KEY, VAR)\
 			else if (szKey == KEY)\
 				VAR = std::format("zombieriot/{}", szValue)
 
-			LOAD_SOUND(u8"倒数声音", Sound::m_Beep);
-			LOAD_SOUND(u8"倒数完毕声音", Sound::m_Starting);
-			LOAD_SOUND(u8"第一次提示声音", Sound::m_CheckPoints[0]);
-			LOAD_SOUND(u8"第二次提示声音", Sound::m_CheckPoints[1]);
-			LOAD_SOUND(u8"最后提示声音", Sound::m_CheckPoints[2]);
-			LOAD_SOUND(u8"人类胜利声音", Sound::m_HumanWins);
-			LOAD_SOUND(u8"僵尸胜利声音", Sound::m_ZombieWins);
-			LOAD_SOUND(u8"允许复活的声音", Sound::m_AllowRespawn);
-			LOAD_SOUND(u8"已复活的声音", Sound::m_PostRespawn);
-			LOAD_SOUND(u8"成为幽灵的声音", Sound::m_GhostSpawn);
+			LOAD_SOUND(u8"倒数声音", Sounds::m_Beep);
+			LOAD_SOUND(u8"倒数完毕声音", Sounds::m_Starting);
+			LOAD_SOUND(u8"第一次提示声音", Sounds::m_CheckPoints[0]);
+			LOAD_SOUND(u8"第二次提示声音", Sounds::m_CheckPoints[1]);
+			LOAD_SOUND(u8"最后提示声音", Sounds::m_CheckPoints[2]);
+			LOAD_SOUND(u8"人类胜利声音", Sounds::m_HumanWins);
+			LOAD_SOUND(u8"僵尸胜利声音", Sounds::m_ZombieWins);
+			LOAD_SOUND(u8"允许复活的声音", Sounds::m_AllowRespawn);
+			LOAD_SOUND(u8"已复活的声音", Sounds::m_PostRespawn);
+			LOAD_SOUND(u8"成为幽灵的声音", Sounds::m_GhostSpawn);
 
 #undef LOAD_SOUND
 
@@ -500,14 +376,14 @@ void Config::LoadSettings(std::filesystem::path const &hPath) noexcept
 			else if (szKey == KEY)\
 				VAR = UTIL_Split(szValue, ", ") | std::views::transform([](auto &&s) noexcept { return std::format("zombieriot/{}", s); }) | std::ranges::to<vector>()
 
-			LOAD_SOUND_ARRAY(u8"僵尸击空声", Sound::m_rgszClawMiss);
-			LOAD_SOUND_ARRAY(u8"僵尸击墙声", Sound::m_rgszScratchingWall);
-			LOAD_SOUND_ARRAY(u8"僵尸轻击声音", Sound::m_rgszClawSlashingFlesh);
-			LOAD_SOUND_ARRAY(u8"僵尸重击声音", Sound::m_rgszClawSlicingFlesh);
-			LOAD_SOUND_ARRAY(u8"BOSS受伤声音", Sound::m_rgszBossHurt);
-			LOAD_SOUND_ARRAY(u8"僵尸受伤声音", Sound::m_rgszZombieHurt);
-			LOAD_SOUND_ARRAY(u8"BOSS死亡声音", Sound::m_rgszBossDeath);
-			LOAD_SOUND_ARRAY(u8"僵尸死亡声音", Sound::m_rgszZombieDeath);
+			LOAD_SOUND_ARRAY(u8"僵尸击空声", Sounds::m_rgszClawMiss);
+			LOAD_SOUND_ARRAY(u8"僵尸击墙声", Sounds::m_rgszScratchingWall);
+			LOAD_SOUND_ARRAY(u8"僵尸轻击声音", Sounds::m_rgszClawSlashingFlesh);
+			LOAD_SOUND_ARRAY(u8"僵尸重击声音", Sounds::m_rgszClawSlicingFlesh);
+			LOAD_SOUND_ARRAY(u8"BOSS受伤声音", Sounds::m_rgszBossHurt);
+			LOAD_SOUND_ARRAY(u8"僵尸受伤声音", Sounds::m_rgszZombieHurt);
+			LOAD_SOUND_ARRAY(u8"BOSS死亡声音", Sounds::m_rgszBossDeath);
+			LOAD_SOUND_ARRAY(u8"僵尸死亡声音", Sounds::m_rgszZombieDeath);
 
 #undef LOAD_SOUND_ARRAY
 		}

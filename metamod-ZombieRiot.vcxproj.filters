@@ -290,6 +290,33 @@
     <ClCompile Include="Source\Platform.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Config.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Escape.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Escape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Query.ixx">
+      <Filter>CSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CVar.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resources.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Message.ixx">
+      <Filter>CSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Hook.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="export.def">

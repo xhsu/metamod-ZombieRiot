@@ -7,6 +7,7 @@ extern void fw_ServerActivate_Post(edict_t *pEdictList, int edictCount, int clie
 extern void fw_ServerDeactivate_Post(void) noexcept;
 extern META_RES FN_PM_Move(playermove_s *ppmove, qboolean server) noexcept;
 extern qboolean fw_AddToFullPack_Post(entity_state_t *pState, int iEntIndex, edict_t *pEdict, edict_t *pClientSendTo, qboolean cl_lw, qboolean bIsPlayer, unsigned char *pSet) noexcept;
+extern void fw_AlertMessage_Post(ALERT_TYPE atype, const char *szFmt, ...) noexcept;
 //
 
 // Natives.cpp
@@ -434,17 +435,249 @@ int HookEngineAPI(enginefuncs_t *pengfuncsFromEngine, int *interfaceVersion) noe
 	return true;
 }
 
+int HookEngineAPI_Post(enginefuncs_t *pengfuncsFromEngine, int *interfaceVersion) noexcept
+{
+	static constexpr enginefuncs_t meta_engfuncs_post = 
+	{
+		.pfnPrecacheModel	= nullptr,
+		.pfnPrecacheSound	= nullptr,
+		.pfnSetModel		= nullptr,
+		.pfnModelIndex		= nullptr,
+		.pfnModelFrames		= nullptr,
+
+		.pfnSetSize			= nullptr,
+		.pfnChangeLevel		= nullptr,
+		.pfnGetSpawnParms	= nullptr,
+		.pfnSaveSpawnParms	= nullptr,
+
+		.pfnVecToYaw		= nullptr,
+		.pfnVecToAngles		= nullptr,
+		.pfnMoveToOrigin	= nullptr,
+		.pfnChangeYaw		= nullptr,
+		.pfnChangePitch		= nullptr,
+
+		.pfnFindEntityByString	= nullptr,
+		.pfnGetEntityIllum		= nullptr,
+		.pfnFindEntityInSphere	= nullptr,
+		.pfnFindClientInPVS		= nullptr,
+		.pfnEntitiesInPVS		= nullptr,
+
+		.pfnMakeVectors		= nullptr,
+		.pfnAngleVectors	= nullptr,
+
+		.pfnCreateEntity		= nullptr,
+		.pfnRemoveEntity		= nullptr,
+		.pfnCreateNamedEntity	= nullptr,
+
+		.pfnMakeStatic		= nullptr,
+		.pfnEntIsOnFloor	= nullptr,
+		.pfnDropToFloor		= nullptr,
+
+		.pfnWalkMove		= nullptr,
+		.pfnSetOrigin		= nullptr,
+
+		.pfnEmitSound		= nullptr,
+		.pfnEmitAmbientSound= nullptr,
+
+		.pfnTraceLine		= nullptr,
+		.pfnTraceToss		= nullptr,
+		.pfnTraceMonsterHull= nullptr,
+		.pfnTraceHull		= nullptr,
+		.pfnTraceModel		= nullptr,
+		.pfnTraceTexture	= nullptr,
+		.pfnTraceSphere		= nullptr,
+		.pfnGetAimVector	= nullptr,
+
+		.pfnServerCommand	= nullptr,
+		.pfnServerExecute	= nullptr,
+		.pfnClientCommand	= nullptr,
+
+		.pfnParticleEffect	= nullptr,
+		.pfnLightStyle		= nullptr,
+		.pfnDecalIndex		= nullptr,
+		.pfnPointContents	= nullptr,
+
+		.pfnMessageBegin	= nullptr,
+		.pfnMessageEnd		= nullptr,
+
+		.pfnWriteByte	= nullptr,
+		.pfnWriteChar	= nullptr,
+		.pfnWriteShort	= nullptr,
+		.pfnWriteLong	= nullptr,
+		.pfnWriteAngle	= nullptr,
+		.pfnWriteCoord	= nullptr,
+		.pfnWriteString	= nullptr,
+		.pfnWriteEntity	= nullptr,
+
+		.pfnCVarRegister	= nullptr,
+		.pfnCVarGetFloat	= nullptr,
+		.pfnCVarGetString	= nullptr,
+		.pfnCVarSetFloat	= nullptr,
+		.pfnCVarSetString	= nullptr,
+
+		.pfnAlertMessage	= &fw_AlertMessage_Post,
+		.pfnEngineFprintf	= nullptr,
+
+		.pfnPvAllocEntPrivateData	= nullptr,
+		.pfnPvEntPrivateData		= nullptr,
+		.pfnFreeEntPrivateData		= nullptr,
+
+		.pfnSzFromIndex		= nullptr,
+		.pfnAllocString		= nullptr,
+
+		.pfnGetVarsOfEnt		= nullptr,
+		.pfnPEntityOfEntOffset	= nullptr,
+		.pfnEntOffsetOfPEntity	= nullptr,
+		.pfnIndexOfEdict		= nullptr,
+		.pfnPEntityOfEntIndex	= nullptr,
+		.pfnFindEntityByVars	= nullptr,
+		.pfnGetModelPtr			= nullptr,
+
+		.pfnRegUserMsg		= nullptr,
+
+		.pfnAnimationAutomove	= nullptr,
+		.pfnGetBonePosition		= nullptr,
+
+		.pfnFunctionFromName	= nullptr,
+		.pfnNameForFunction		= nullptr,
+
+		.pfnClientPrintf	= nullptr,
+		.pfnServerPrint		= nullptr,
+
+		.pfnCmd_Args	= nullptr,
+		.pfnCmd_Argv	= nullptr,
+		.pfnCmd_Argc	= nullptr,
+
+		.pfnGetAttachment	= nullptr,
+
+		.pfnCRC32_Init			= nullptr,
+		.pfnCRC32_ProcessBuffer	= nullptr,
+		.pfnCRC32_ProcessByte	= nullptr,
+		.pfnCRC32_Final			= nullptr,
+
+		.pfnRandomLong	= nullptr,
+		.pfnRandomFloat	= nullptr,
+
+		.pfnSetView			= nullptr,
+		.pfnTime			= nullptr,
+		.pfnCrosshairAngle	= nullptr,
+
+		.pfnLoadFileForMe	= nullptr,
+		.pfnFreeFile		= nullptr,
+
+		.pfnEndSection		= nullptr,
+		.pfnCompareFileTime	= nullptr,
+		.pfnGetGameDir		= nullptr,
+		.pfnCvar_RegisterVariable	= nullptr,
+		.pfnFadeClientVolume	= nullptr,
+		.pfnSetClientMaxspeed	= nullptr,
+		.pfnCreateFakeClient	= nullptr,
+		.pfnRunPlayerMove		= nullptr,
+		.pfnNumberOfEntities	= nullptr,
+
+		.pfnGetInfoKeyBuffer	= nullptr,
+		.pfnInfoKeyValue		= nullptr,
+		.pfnSetKeyValue			= nullptr,
+		.pfnSetClientKeyValue	= nullptr,
+
+		.pfnIsMapValid		= nullptr,
+		.pfnStaticDecal		= nullptr,
+		.pfnPrecacheGeneric	= nullptr,
+		.pfnGetPlayerUserId	= nullptr,
+		.pfnBuildSoundMsg	= nullptr,
+		.pfnIsDedicatedServer	= nullptr,
+		.pfnCVarGetPointer	= nullptr,
+		.pfnGetPlayerWONId	= nullptr,
+
+		.pfnInfo_RemoveKey		= nullptr,
+		.pfnGetPhysicsKeyValue	= nullptr,
+		.pfnSetPhysicsKeyValue	= nullptr,
+		.pfnGetPhysicsInfoString= nullptr,
+		.pfnPrecacheEvent		= nullptr,
+		.pfnPlaybackEvent		= nullptr,
+
+		.pfnSetFatPVS		= nullptr,
+		.pfnSetFatPAS		= nullptr,
+
+		.pfnCheckVisibility	= nullptr,
+
+		.pfnDeltaSetField			= nullptr,
+		.pfnDeltaUnsetField			= nullptr,
+		.pfnDeltaAddEncoder			= nullptr,
+		.pfnGetCurrentPlayer		= nullptr,
+		.pfnCanSkipPlayer			= nullptr,
+		.pfnDeltaFindField			= nullptr,
+		.pfnDeltaSetFieldByIndex	= nullptr,
+		.pfnDeltaUnsetFieldByIndex	= nullptr,
+
+		.pfnSetGroupMask			= nullptr,
+
+		.pfnCreateInstancedBaseline	= nullptr,
+		.pfnCvar_DirectSet			= nullptr,
+
+		.pfnForceUnmodified			= nullptr,
+
+		.pfnGetPlayerStats			= nullptr,
+
+		.pfnAddServerCommand		= nullptr,
+
+		// Added in SDK 2.2:
+		.pfnVoice_GetClientListening	= nullptr,
+		.pfnVoice_SetClientListening	= nullptr,
+
+		// Added for HL 1109 (no SDK update):
+		.pfnGetPlayerAuthId	= nullptr,
+
+		// Added 2003/11/10 (no SDK update):
+		.pfnSequenceGet							= nullptr,
+		.pfnSequencePickSentence				= nullptr,
+		.pfnGetFileSize							= nullptr,
+		.pfnGetApproxWavePlayLen				= nullptr,
+		.pfnIsCareerMatch						= nullptr,
+		.pfnGetLocalizedStringLength			= nullptr,
+		.pfnRegisterTutorMessageShown			= nullptr,
+		.pfnGetTimesTutorMessageShown			= nullptr,
+		.pfnProcessTutorMessageDecayBuffer		= nullptr,
+		.pfnConstructTutorMessageDecayBuffer	= nullptr,
+		.pfnResetTutorMessageDecayData			= nullptr,
+
+		// Added Added 2005-08-11 (no SDK update)
+		.pfnQueryClientCvarValue	= nullptr,
+		// Added Added 2005-11-22 (no SDK update)
+		.pfnQueryClientCvarValue2	= nullptr,
+		// Added 2009-06-17 (no SDK update)
+		.pfnEngCheckParm			= nullptr,
+	};
+
+	if (!pengfuncsFromEngine) [[unlikely]]
+	{
+		gpMetaUtilFuncs->pfnLogError(PLID, "Function 'HookEngineAPI_Post' called with null 'pengfuncsFromEngine' parameter.");
+		return false;
+	}
+	else if (*interfaceVersion != ENGINE_INTERFACE_VERSION) [[unlikely]]
+	{
+		gpMetaUtilFuncs->pfnLogError(PLID, "Function 'HookEngineAPI_Post' called with version mismatch. Expected: %d, receiving: %d.", ENGINE_INTERFACE_VERSION, *interfaceVersion);
+
+		// Tell metamod what version we had, so it can figure out who is out of date.
+		*interfaceVersion = ENGINE_INTERFACE_VERSION;
+		return false;
+	}
+
+	memcpy(pengfuncsFromEngine, &meta_engfuncs_post, sizeof(enginefuncs_t));
+	return true;
+}
+
 // Must provide at least one of these..
 inline constexpr META_FUNCTIONS gMetaFunctionTable =
 {
-	.pfnGetEntityAPI = nullptr,								// HL SDK; called before game DLL
-	.pfnGetEntityAPI_Post = nullptr,						// META; called after game DLL
-	.pfnGetEntityAPI2 = &HookGameDLLExportedFn,				// HL SDK2; called before game DLL
-	.pfnGetEntityAPI2_Post = &HookGameDLLExportedFn_Post,	// META; called after game DLL
-	.pfnGetNewDLLFunctions = nullptr,						// HL SDK2; called before game DLL
-	.pfnGetNewDLLFunctions_Post = nullptr,					// META; called after game DLL
-	.pfnGetEngineFunctions = &HookEngineAPI,				// META; called before HL engine
-	.pfnGetEngineFunctions_Post = nullptr,					// META; called after HL engine
+	.pfnGetEntityAPI			= nullptr,						// HL SDK; called before game DLL
+	.pfnGetEntityAPI_Post		= nullptr,						// META; called after game DLL
+	.pfnGetEntityAPI2			= &HookGameDLLExportedFn,		// HL SDK2; called before game DLL
+	.pfnGetEntityAPI2_Post		= &HookGameDLLExportedFn_Post,	// META; called after game DLL
+	.pfnGetNewDLLFunctions		= nullptr,						// HL SDK2; called before game DLL
+	.pfnGetNewDLLFunctions_Post	= nullptr,						// META; called after game DLL
+	.pfnGetEngineFunctions		= &HookEngineAPI,				// META; called before HL engine
+	.pfnGetEngineFunctions_Post	= &HookEngineAPI_Post,			// META; called after HL engine
 };
 
 // Metamod requesting info about this plugin:
