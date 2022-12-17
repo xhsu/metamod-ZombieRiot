@@ -20,6 +20,7 @@
     <ClCompile Include="..\metamod-AirSupport\Source\CSDK\CBase.ixx" />
     <ClCompile Include="..\metamod-AirSupport\Source\CSDK\GameRules.ixx" />
     <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Message.ixx" />
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Platform.ixx" />
     <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Query.ixx" />
     <ClCompile Include="..\metamod-p\hlsdk\cl_dll\hud_iface.ixx" />
     <ClCompile Include="..\metamod-p\hlsdk\cl_dll\wrect.ixx" />
@@ -94,7 +95,6 @@
     <ClCompile Include="Source\Hook.ixx" />
     <ClCompile Include="Source\Message.cpp" />
     <ClCompile Include="Source\Native.cpp" />
-    <ClCompile Include="Source\Platform.ixx" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Player.ixx" />
     <ClCompile Include="Source\Plugin.cpp" />

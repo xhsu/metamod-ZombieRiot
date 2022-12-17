@@ -287,9 +287,6 @@
     <ClCompile Include="..\Hydrogenium\UtlString.ixx">
       <Filter>Hydrogenium</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Platform.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Config.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -316,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="Source\Hook.ixx">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Platform.ixx">
+      <Filter>CSDK</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
