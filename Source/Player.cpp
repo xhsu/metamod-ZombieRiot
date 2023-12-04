@@ -749,7 +749,8 @@ void Player::SetAnimation(int iPlayer, PLAYER_ANIM iAnim) noexcept
 		HamF_SetAnimation(pPlayer, 0, iAnim);
 }
 
-inline constexpr unsigned char SET_ANIMATION_FN_PATTERN[] = "\x90\x83\xEC\x4C\x53\x55\x8B\x2A\x56\x57\x8B\x4D\x04\x8B\x2A\x2A\x2A\x2A\x2A\x85\xC0";
+inline constexpr unsigned char SET_ANIMATION_FN_NEW_PATTERN[] = "\x90\x83\xEC\x4C\x53\x55\x8B\x2A\x56\x57\x8B\x4D\x04\x8B\x2A\x2A\x2A\x2A\x2A\x85\xC0";
+inline constexpr unsigned char SET_ANIMATION_FN_ANNIV_PATTERN[] = "\xCC\x55\x8B\xEC\x83\xE4\xF8\x83\xEC\x54\xA1\x2A\x2A\x2A\x2A\x33\xC4\x89\x44\x24\x50";
 
 void Player::Hook(void) noexcept
 {
@@ -766,7 +767,7 @@ void Player::Hook(void) noexcept
 		bHooked = true;
 
 		unsigned char rgPatch[5]{}, rgOriginalBytes[5]{};
-		auto const addr = UTIL_SearchPattern("mp.dll", SET_ANIMATION_FN_PATTERN, 1);
+		auto const addr = UTIL_SearchPattern("mp.dll", 1, SET_ANIMATION_FN_NEW_PATTERN, SET_ANIMATION_FN_ANNIV_PATTERN);
 		UTIL_PreparePatch(addr, &HamF_SetAnimation, rgPatch, rgOriginalBytes);
 		UTIL_DoPatch(addr, rgPatch);
 	}

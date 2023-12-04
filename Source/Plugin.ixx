@@ -367,12 +367,12 @@ export inline mutil_funcs_t *gpMetaUtilFuncs = nullptr;	// metamod utility funct
 export inline constexpr plugin_info_t gPluginInfo =
 {
 	.ifvers		= META_INTERFACE_VERSION,
-	.name		= "minimal stub",
-	.version	= "1.17",
-	.date		= "2003/11/15",
-	.author		= "Will Day <willday@metamod.org>",
+	.name		= "Zombie Riot",
+	.version	= "1.19",
+	.date		= "2023/12/04",
+	.author		= "DSHGFHDS & xhsu",
 	.url		= "http://www.metamod.org/",
-	.logtag		= "STUB",
+	.logtag		= "ZR",
 	.loadable	= PT_ANYTIME,
 	.unloadable	= PT_ANYPAUSE,
 };
@@ -385,11 +385,11 @@ export inline constexpr auto PLID = &gPluginInfo;
 // Module info
 export inline constexpr amxx_module_info_s g_ModuleInfo =
 {
-	.name = "example",
-	.author = "Luna the Reborn",
-	.version = "1.0",
+	.name = gPluginInfo.name,
+	.author = gPluginInfo.author,
+	.version = gPluginInfo.version,
 	.reload = false,	// Should reload module on new map?
-	.logtag = "example",
-	.library = "What is this?",
+	.logtag = gPluginInfo.logtag,
+	.library = "zombieriot",
 	.libclass = "",	// LUNA: no idea what is this, but keep it empty.
 };

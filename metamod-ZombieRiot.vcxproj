@@ -15,7 +15,9 @@
     <ClCompile Include="..\Hydrogenium\UtlHook.ixx" />
     <ClCompile Include="..\Hydrogenium\UtlRandom.ixx" />
     <ClCompile Include="..\metamod-AirSupport\Source\CSDK\CBase.ixx" />
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Engine.ixx" />
     <ClCompile Include="..\metamod-AirSupport\Source\CSDK\GameRules.ixx" />
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Platform.ixx" />
     <ClCompile Include="..\metamod-p\hlsdk\cl_dll\hud_iface.ixx" />
     <ClCompile Include="..\metamod-p\hlsdk\cl_dll\wrect.ixx" />
     <ClCompile Include="..\metamod-p\hlsdk\common\beamdef.ixx" />
@@ -140,7 +142,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;STUBPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_DEBUG;STUBPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
@@ -162,7 +164,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;STUBPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;NDEBUG;STUBPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>

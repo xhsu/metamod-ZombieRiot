@@ -1,13 +1,16 @@
 #include <cassert>
 
+import Engine;
 import GameRules;
+import Platform;
 
 import UtlHook;
 
 import Plugin;
 import Round;
 
-inline constexpr unsigned char CWORLD_PRECACHE_FN_PATTERN[] = "\x90\x55\x57\x33\xFF\x68\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\x8B\xE9\x89\x3D\x2A\x2A\x2A\x2A\x89\x3D\x2A\x2A\x2A\x2A\x89\x3D";
+inline constexpr unsigned char CWORLD_PRECACHE_FN_NEW_PATTERN[] = "\x90\x55\x57\x33\xFF\x68\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\x8B\xE9\x89\x3D\x2A\x2A\x2A\x2A\x89\x3D\x2A\x2A\x2A\x2A\x89\x3D";
+inline constexpr unsigned char CWORLD_PRECACHE_FN_ANNIV_PATTERN[] = "\xCC\x55\x8B\xEC\x51\x57\x68\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\x8B\xF9\xC7\x05";
 
 inline constexpr size_t VFTIDX_CHalfLifeMultiplay_CheckWinConditions = 65;
 
@@ -16,18 +19,20 @@ inline std::uint8_t g_CheckWinConditionsRestoreByte = 0;
 
 void Round::Hook(void) noexcept
 {
-	auto addr = (std::uintptr_t)UTIL_SearchPattern("mp.dll", CWORLD_PRECACHE_FN_PATTERN, 1);
+	auto addr = (std::uintptr_t)UTIL_SearchPattern("mp.dll", 1, CWORLD_PRECACHE_FN_NEW_PATTERN, CWORLD_PRECACHE_FN_ANNIV_PATTERN);
 
 #ifdef _DEBUG
 	assert(addr != 0);
 #else
 	[[unlikely]]
 	if (!addr)
-		gpMetaUtilFuncs->pfnLogError(PLID, "Function \"CWorld::Precache\" no found!");
+		UTIL_Terminate("Function \"CWorld::Precache\" no found!");
 #endif
+	static constexpr std::ptrdiff_t ofs_anniv = 0xC24E3 - 0xC2440;
+	static constexpr std::ptrdiff_t ofs_new = 0xD29B4 - 0xD2940;
 
-	addr += (std::ptrdiff_t)(0xD29B4 - 0xD2940);
-	g_pGameRules = *(CHalfLifeMultiplay **)(void **)(*(long *)addr);
+	addr += Engine::BUILD_NUMBER >= Engine::ANNIVERSARY ? ofs_anniv : ofs_new;
+	g_pGameRules = *(CHalfLifeMultiplay**)(void**)(*(long*)addr);
 
 	assert(g_pGameRules != nullptr);
 
@@ -39,9 +44,9 @@ void Round::Hook(void) noexcept
 	[[unlikely]]
 	if (!bGameRuleHooked)
 	{
-		auto const rgpfn = UTIL_RetrieveVirtualFunctionTable(g_pGameRules);
+		auto const vft = UTIL_RetrieveVirtualFunctionTable(g_pGameRules);
 
-		g_dwCheckWinConditions = (std::uintptr_t)rgpfn[VFTIDX_CHalfLifeMultiplay_CheckWinConditions];
+		g_dwCheckWinConditions = (std::uintptr_t)vft[VFTIDX_CHalfLifeMultiplay_CheckWinConditions];
 		g_CheckWinConditionsRestoreByte = *(std::uint8_t *)g_dwCheckWinConditions;
 
 		bGameRuleHooked = true;
@@ -50,9 +55,14 @@ void Round::Hook(void) noexcept
 
 void Round::SetPatchRoundEnd(bool const bShouldPatch) noexcept
 {
+	// the function CHalfLifeMultiplay::CheckWinConditions have no argument at all.
+	// so just instruct RETN, as nothing to rewind on stack frame.
+
+	static constexpr std::uint8_t ASM_RETN = 0xC3;	// _asm retn
+
 	UTIL_WriteMemory(
 		(void *)g_dwCheckWinConditions,
-		bShouldPatch ? (std::uint8_t)0xC3 : g_CheckWinConditionsRestoreByte
+		bShouldPatch ? ASM_RETN : g_CheckWinConditionsRestoreByte
 	);
 }
 

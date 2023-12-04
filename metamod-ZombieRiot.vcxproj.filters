@@ -269,6 +269,12 @@
     <ClCompile Include="..\Hydrogenium\UtlConcepts.ixx">
       <Filter>Hydrogenium</Filter>
     </ClCompile>
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Platform.ixx">
+      <Filter>CSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\metamod-AirSupport\Source\CSDK\Engine.ixx">
+      <Filter>CSDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="export.def">

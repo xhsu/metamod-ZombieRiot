@@ -1,3 +1,5 @@
+import Engine;
+
 import Plugin;
 
 // Hook.cpp
@@ -107,7 +109,7 @@ int HookGameDLLExportedFn_Post(DLL_FUNCTIONS *pFunctionTable, int *interfaceVers
 {
 	static constexpr DLL_FUNCTIONS gFunctionTable =
 	{
-		.pfnGameInit	= nullptr,
+		.pfnGameInit	= &Engine::Init,
 		.pfnSpawn		= &fw_Spawn_Post,
 		.pfnThink		= nullptr,
 		.pfnUse			= nullptr,
