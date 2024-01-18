@@ -1,4 +1,3 @@
-#include <cassert>
 
 import Engine;
 import GameRules;
@@ -9,8 +8,6 @@ import UtlHook;
 import Plugin;
 import Round;
 
-inline constexpr unsigned char CWORLD_PRECACHE_FN_NEW_PATTERN[] = "\x90\x55\x57\x33\xFF\x68\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\x8B\xE9\x89\x3D\x2A\x2A\x2A\x2A\x89\x3D\x2A\x2A\x2A\x2A\x89\x3D";
-inline constexpr unsigned char CWORLD_PRECACHE_FN_ANNIV_PATTERN[] = "\xCC\x55\x8B\xEC\x51\x57\x68\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\x8B\xF9\xC7\x05";
 
 inline constexpr size_t VFTIDX_CHalfLifeMultiplay_CheckWinConditions = 65;
 
@@ -19,22 +16,7 @@ inline std::uint8_t g_CheckWinConditionsRestoreByte = 0;
 
 void Round::Hook(void) noexcept
 {
-	auto addr = (std::uintptr_t)UTIL_SearchPattern("mp.dll", 1, CWORLD_PRECACHE_FN_NEW_PATTERN, CWORLD_PRECACHE_FN_ANNIV_PATTERN);
-
-#ifdef _DEBUG
-	assert(addr != 0);
-#else
-	[[unlikely]]
-	if (!addr)
-		UTIL_Terminate("Function \"CWorld::Precache\" no found!");
-#endif
-	static constexpr std::ptrdiff_t ofs_anniv = 0xC24E3 - 0xC2440;
-	static constexpr std::ptrdiff_t ofs_new = 0xD29B4 - 0xD2940;
-
-	addr += Engine::BUILD_NUMBER >= Engine::ANNIVERSARY ? ofs_anniv : ofs_new;
-	g_pGameRules = *(CHalfLifeMultiplay**)(void**)(*(long*)addr);
-
-	assert(g_pGameRules != nullptr);
+	RetrieveGameRules();
 
 	// However, the hook status remains even if the game reloaded.
 	// Still need this method to make sure the hooks are happened only once.

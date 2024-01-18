@@ -1,11 +1,11 @@
-import Engine;
 
 import Plugin;
 
 // Hook.cpp
+extern void fw_GameInit_Post() noexcept;
 extern int fw_Spawn_Post(edict_t *pEdict) noexcept;
 extern void fw_ServerActivate_Post(edict_t *pEdictList, int edictCount, int clientMax) noexcept;
-extern META_RES FN_PM_Move(playermove_s *ppmove, qboolean server) noexcept;
+extern META_RES fw_PM_Move(playermove_s *ppmove, qboolean server) noexcept;
 extern qboolean fw_AddToFullPack_Post(entity_state_t *pState, int iEntIndex, edict_t *pEdict, edict_t *pClientSendTo, qboolean cl_lw, qboolean bIsPlayer, unsigned char *pSet) noexcept;
 //
 
@@ -68,7 +68,7 @@ int HookGameDLLExportedFn(DLL_FUNCTIONS *pFunctionTable, int *interfaceVersion) 
 
 		.pfnSys_Error			= nullptr,
 
-		.pfnPM_Move				= [](playermove_s *ppmove, qboolean server) noexcept { gpMetaGlobals->mres = FN_PM_Move(ppmove, server); },
+		.pfnPM_Move				= [](playermove_s *ppmove, qboolean server) noexcept { gpMetaGlobals->mres = fw_PM_Move(ppmove, server); },
 		.pfnPM_Init				= nullptr,
 		.pfnPM_FindTextureType	= nullptr,
 
@@ -109,7 +109,7 @@ int HookGameDLLExportedFn_Post(DLL_FUNCTIONS *pFunctionTable, int *interfaceVers
 {
 	static constexpr DLL_FUNCTIONS gFunctionTable =
 	{
-		.pfnGameInit	= &Engine::Init,
+		.pfnGameInit	= &fw_GameInit_Post,
 		.pfnSpawn		= &fw_Spawn_Post,
 		.pfnThink		= nullptr,
 		.pfnUse			= nullptr,

@@ -1,17 +1,28 @@
+
+#ifndef __INTELLISENSE__
 import <algorithm>;
 import <array>;
 import <string_view>;
 import <string>;
 import <vector>;
+#else
+#include <algorithm>
+#include <array>
+#include <string_view>
+#include <string>
+#include <vector>
+#endif
 
 import eiface;
 import pm_defs;
 import util;
 
 import CBase;
+import Engine;
 import Player;
 import Plugin;
 import Round;
+import Uranus;
 
 using namespace std::string_literals;
 using namespace std::string_view_literals;
@@ -28,6 +39,14 @@ inline constexpr array g_rgszEntityCanBeClip =
 	"hostage_entity"sv,
 	"func_pushable"sv,
 };
+
+void fw_GameInit_Post() noexcept
+{
+	gpMetaGlobals->mres = MRES_IGNORED;
+
+	Engine::Init();
+	Uranus::RetrieveUranusLocal();
+}
 
 int fw_Spawn_Post(edict_t *pEdict) noexcept
 {
@@ -67,7 +86,7 @@ void fw_ServerActivate_Post(edict_t *pEdictList, int edictCount, int clientMax) 
 
 }
 
-META_RES FN_PM_Move(playermove_s *ppmove, qboolean server) noexcept
+META_RES fw_PM_Move(playermove_s *ppmove, qboolean server) noexcept
 {
 	if (ppmove->spectator)
 		return MRES_IGNORED;
