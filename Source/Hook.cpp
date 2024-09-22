@@ -45,7 +45,7 @@ void fw_GameInit_Post() noexcept
 	gpMetaGlobals->mres = MRES_IGNORED;
 
 	Engine::Init();
-	Uranus::RetrieveUranusLocal();
+	Uranus::RetrieveUranusLocal(false);
 }
 
 int fw_Spawn_Post(edict_t *pEdict) noexcept
@@ -93,7 +93,7 @@ META_RES fw_PM_Move(playermove_s *ppmove, qboolean server) noexcept
 
 	static std::vector<size_t> rgiPhysEntsIndex{};
 	rgiPhysEntsIndex.clear();
-	rgiPhysEntsIndex.reserve(MAX_PHYSENTS);
+	//rgiPhysEntsIndex.reserve(MAX_PHYSENTS);	// 'reserve' have a good use only in the very first call
 
 	for (size_t i = 0; i < (size_t)ppmove->numphysent; ++i)
 	{
@@ -120,7 +120,7 @@ META_RES fw_PM_Move(playermove_s *ppmove, qboolean server) noexcept
 	}
 
 	ppmove->numphysent = std::ssize(rgiPhysEntsIndex);
-	return MRES_IGNORED;
+	return MRES_HANDLED;
 }
 
 qboolean fw_AddToFullPack_Post(entity_state_t *pState, int iEntIndex, edict_t *pEdict, edict_t *pClientSendTo, qboolean cl_lw, qboolean bIsPlayer, unsigned char *pSet) noexcept

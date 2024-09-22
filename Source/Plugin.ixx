@@ -368,7 +368,7 @@ export inline constexpr plugin_info_t gPluginInfo =
 {
 	.ifvers		= META_INTERFACE_VERSION,
 	.name		= "Zombie Riot",
-	.version	= "1.19",
+	.version	= "1.19.7270",
 	.date		= __DATE__,
 	.author		= "DSHGFHDS & xhsu",
 	.url		= "http://www.metamod.org/",
